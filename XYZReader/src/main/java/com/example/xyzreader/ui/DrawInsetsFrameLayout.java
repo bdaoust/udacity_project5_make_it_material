@@ -103,6 +103,7 @@ public class DrawInsetsFrameLayout extends FrameLayout {
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         insets = super.onApplyWindowInsets(insets);
+
         mInsets = new Rect(
                 insets.getSystemWindowInsetLeft(),
                 insets.getSystemWindowInsetTop(),
@@ -153,7 +154,7 @@ public class DrawInsetsFrameLayout extends FrameLayout {
         }
     }
 
-    public static interface OnInsetsCallback {
-        public void onInsetsChanged(Rect insets);
+    public interface OnInsetsCallback {
+        void onInsetsChanged(Rect insets);
     }
 }

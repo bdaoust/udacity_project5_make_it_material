@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.Spanned;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,6 +51,7 @@ public class ArticleDetailFragment extends Fragment implements
     private ObservableScrollView mScrollView;
     private DrawInsetsFrameLayout mDrawInsetsFrameLayout;
     private ColorDrawable mStatusBarColorDrawable;
+    private int mPosition;
 
     private int mTopInset;
     private View mPhotoContainerView;
@@ -64,11 +67,12 @@ public class ArticleDetailFragment extends Fragment implements
     public ArticleDetailFragment() {
     }
 
-    public static ArticleDetailFragment newInstance(long itemId) {
+    public static ArticleDetailFragment newInstance(long itemId, int position) {
         Bundle arguments = new Bundle();
         arguments.putLong(ARG_ITEM_ID, itemId);
         ArticleDetailFragment fragment = new ArticleDetailFragment();
         fragment.setArguments(arguments);
+        fragment.setPosition(position);
         return fragment;
     }
 
@@ -126,6 +130,10 @@ public class ArticleDetailFragment extends Fragment implements
         });
 
         mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mPhotoView.setTransitionName("articlePhoto" + mPosition);
+        }
+
         mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
 
         mStatusBarColorDrawable = new ColorDrawable(0);
@@ -133,9 +141,12 @@ public class ArticleDetailFragment extends Fragment implements
         mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TextView articleTitle;
+
+                articleTitle = (TextView)mRootView.findViewById(R.id.article_title);
                 startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
                         .setType("text/plain")
-                        .setText("Some sample text")
+                        .setText(articleTitle.getText())
                         .getIntent(), getString(R.string.action_share)));
             }
         });
@@ -143,6 +154,10 @@ public class ArticleDetailFragment extends Fragment implements
         bindViews();
         updateStatusBar();
         return mRootView;
+    }
+
+    private void setPosition(int position){
+        mPosition = position;
     }
 
     private void updateStatusBar() {
@@ -214,11 +229,13 @@ public class ArticleDetailFragment extends Fragment implements
                                         .setBackgroundColor(mMutedColor);
                                 updateStatusBar();
                             }
+
+                            scheduleStartPostponedTransition();
                         }
 
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-
+                            scheduleStartPostponedTransition();
                         }
                     });
         } else {
@@ -281,5 +298,17 @@ public class ArticleDetailFragment extends Fragment implements
         }
 
         return spanned;
+    }
+
+    private void scheduleStartPostponedTransition(){
+        mPhotoView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                mPhotoView.getViewTreeObserver().removeOnPreDrawListener(this);
+                ((AppCompatActivity)getActivity()).supportStartPostponedEnterTransition();
+
+                return true;
+            }
+        });
     }
 }

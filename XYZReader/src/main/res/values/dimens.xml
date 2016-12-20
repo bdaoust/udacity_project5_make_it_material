@@ -1,11 +1,33 @@
 <resources>
+    <dimen name="app_bar_height">116dp</dimen>
+
+    <!-- list -->
+    <integer name="list_column_count">1</integer>
+    <dimen name="list_side_margin">4dp</dimen>
+    <dimen name="list_toolbar_side_margin">0dp</dimen>
+    <dimen name="list_bottom_margin">16dp</dimen>
+    <dimen name="cardview_margin">4dp</dimen>
+    <dimen name="cardview_thumbnail_size">100dp</dimen>
+    <dimen name="cardview_title_padding_horizontal">8dp</dimen>
+    <dimen name="cardview_title_padding_top">8dp</dimen>
+    <dimen name="cardview_subtitle_padding_horizontal">8dp</dimen>
+    <dimen name="cardview_title_padding_bottom">4dp</dimen>
+    <dimen name="cardview_subtitle_padding_bottom">8dp</dimen>
+
     <!-- detail -->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="icon_width">56dp</dimen>
     <dimen name="detail_title_text_size">32sp</dimen>
     <dimen name="detail_body_text_size">22sp</dimen>
+    <dimen name="detail_card_elevation">2dp</dimen>
+    <dimen name="detail_photo_height">280dp</dimen>
+    <dimen name="detail_photo_background_protection_height">112dp</dimen>
+    <dimen name="detail_card_top_margin">@dimen/detail_photo_height</dimen>
+    <dimen name="detail_inner_horiz_margin">16dp</dimen>
+    <dimen name="detail_card_max_width">10000dp</dimen> <!-- force match_parent -->
+    <dimen name="detail_metabar_vert_padding">16dp</dimen>
+    <dimen name="detail_metabar_title_bottom_padding">4dp</dimen>
+    <dimen name="detail_body_top_margin">16dp</dimen>
+    <dimen name="detail_body_bottom_margin">88dp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
-
-    <dimen name="fab_elevation">2dp</dimen>
-    <dimen name="fab_press_translation_z">6dp</dimen>
-    <dimen name="fab_margin">24dp</dimen>
-
 </resources>

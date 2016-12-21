@@ -14,10 +14,13 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.SharedElementCallback;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.xyzreader.R;
@@ -56,6 +59,7 @@ public class ArticleDetailActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         CustomSharedElementCallback customSharedElementCallback;
+        Slide slide;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().getDecorView().setSystemUiVisibility(
@@ -129,6 +133,15 @@ public class ArticleDetailActivity extends AppCompatActivity
                 mSelectedItemId = mStartId;
             }
         }
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            slide = new Slide(Gravity.BOTTOM);
+            slide.addTarget(R.id.article_container);
+            slide.setInterpolator(AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in));
+            slide.setDuration(500);
+            getWindow().setEnterTransition(slide);
+        }
+
     }
 
     @Override

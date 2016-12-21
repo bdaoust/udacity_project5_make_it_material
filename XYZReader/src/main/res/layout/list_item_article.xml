@@ -19,6 +19,9 @@
         <!--suppress AndroidLintContentDescription -->
         <com.example.xyzreader.ui.DynamicHeightNetworkImageView
             android:id="@+id/thumbnail"
+            android:layout_marginLeft="@dimen/cardview_thumbnail_margin_horizontal"
+            android:layout_marginStart="@dimen/cardview_thumbnail_margin_horizontal"
+            android:layout_marginTop="@dimen/cardview_thumbnail_margin_top"
             android:layout_width="@dimen/cardview_thumbnail_size"
             android:layout_height="@dimen/cardview_thumbnail_size"
             android:background="@color/article_photo_placeholder" />

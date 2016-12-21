@@ -8,6 +8,8 @@
     <dimen name="list_bottom_margin">16dp</dimen>
     <dimen name="cardview_margin">4dp</dimen>
     <dimen name="cardview_thumbnail_size">100dp</dimen>
+    <dimen name="cardview_thumbnail_margin_horizontal">8dp</dimen>
+    <dimen name="cardview_thumbnail_margin_top">8dp</dimen>
     <dimen name="cardview_title_padding_horizontal">8dp</dimen>
     <dimen name="cardview_title_padding_top">8dp</dimen>
     <dimen name="cardview_subtitle_padding_horizontal">8dp</dimen>

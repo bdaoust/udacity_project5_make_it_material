@@ -311,4 +311,8 @@ public class ArticleDetailFragment extends Fragment implements
             }
         });
     }
+
+    public ImageView getArticlePhoto(){
+        return mPhotoView;
+    }
 }
